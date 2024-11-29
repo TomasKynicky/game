@@ -1,12 +1,12 @@
 name: Itch.io Deploy Workflow
 
 on:
-  push:
+  push: # Trigger on push events for all branches
     branches:
-      - main
+      - '*'
     paths:
       - game/**
-  workflow_dispatch:
+  workflow_dispatch: # Manual trigger support
 
 jobs:
   itchio-deploy:
@@ -14,7 +14,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: 
+        working-directory: game # Ensures all actions run in the "game" directory
 
     steps:
       - uses: actions/checkout@v3
@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: "16.x"
           cache: 'npm'
-          cache-dependency-path: game/yarn.lock
+          cache-dependency-path: yarn.lock # Adjusted to match "working-directory"
         env:
           CI: true
 
@@ -34,18 +34,19 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: yarn build
+      - name: Build the project
         run: yarn build
         env:
           CI: true
 
-      - run: ls
+      - name: List build output
+        run: ls dist
 
-      - name: Deploy
+      - name: Deploy to Itch.io
         uses: tomaskynicky/butler-publish-itchio-action@v1.0.3
         env:
           BUTLER_CREDENTIALS: ${{ secrets.ITCH_IO_API_KEY }}
           CHANNEL: HTML
-          ITCH_GAME: github-actions-game
-          ITCH_USER: galemius
-          PACKAGE: game/dist
+          ITCH_GAME: adam-slayyyy # Update to match your Itch.io project slug
+          ITCH_USER: tomaskynicky # Update with your Itch.io username
+          PACKAGE: dist # Directory where build files are located
