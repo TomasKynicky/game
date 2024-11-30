@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://b303almng7bea"]
+
+[ext_resource type="Texture2D" uid="uid://bkchqcxnjl0ck" path="res://empty1.webp" id="1_8fmm6"]
+[ext_resource type="Texture2D" uid="uid://c0xuayhvumr2m" path="res://icon.svg" id="2_nd3ac"]
+
+[node name="Empty2" type="Node2D"]
+
+[node name="Empty1" type="Sprite2D" parent="."]
+texture = ExtResource("1_8fmm6")
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("2_nd3ac")

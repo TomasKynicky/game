@@ -1,18 +1,19 @@
 extends Node2D
 
-@export var block_height = 2000 #px block height
-@export var block_width = 2000 #px block width
+@export var block_height = 850 #px block height
+@export var block_width = 850 #px block width
+@export var block_scale = 0.2
 
-@export var stack_length_min = 20 #min length of stacks in blocks
-@export var stack_length_max = 30 #max length of stacks in blocks 
+@export var stack_length_min = 8 #min length of stacks in blocks
+@export var stack_length_max = 10 #max length of stacks in blocks 
 var stack_length
 
-@export var stack_count_min = 5 # min number of horizontal lines
-@export var stack_count_max = 7 # max number of horizontal lines
+@export var stack_count_min = 2 # min number of horizontal lines
+@export var stack_count_max = 3 # max number of horizontal lines
 var stack_count
 
-@export var vertical_lines_count_max = 5 # max number of vertical lines
-@export var vertical_lines_count_min = 7 # min number of vertical lines
+@export var vertical_lines_count_max = 4 # max number of vertical lines
+@export var vertical_lines_count_min = 5 # min number of vertical lines
 var vertical_lines_count 
 
 @export var vertical_probability = 2
@@ -32,9 +33,15 @@ var big_matrix #matrix of values which will spawn the level lines
 
 var count = 0
 
-
-
-
+var empty1 = preload("res://empty1.tscn")
+var empty2 = preload("res://empty2.tscn")
+var brick1 = preload("res://brick1.tscn")
+var brick2 = preload("res://brick2.tscn")
+var player_spawn = preload("res://player_spawn.tscn")
+var player_exit = preload("res://player_exit.tscn")
+var kamikaze_spawn = preload("res://kamikaze_spawn.tscn")
+var grenadier_spawn = preload("res://grenadier_spawn.tscn")
+var sniper_spawn = preload("res://sniper_spawn.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -49,6 +56,7 @@ func _ready() -> void:
 	_randomize_enemies()
 	_add_spawn()
 	_add_exit()
+	_instantiate_shit()
 	
 	for i in range(big_matrix.size()):
 		print(big_matrix[i])
@@ -311,6 +319,7 @@ func _randomize_emptys():
 						big_matrix[i][j] = 20
 					_:
 						pass
+
 #randomize enemies
 func _randomize_enemies():
 	for i in range(big_matrix.size()):
@@ -327,23 +336,99 @@ func _randomize_enemies():
 
 #add spawn
 func _add_spawn():
+	var j = 0
 	for i in range(big_matrix.size()):
-		for j in range(big_matrix[0].size()):
-			if big_matrix[i][j] == 0 or big_matrix[i][j] == 20:
-				big_matrix[i][j] = 3
-				return
+		if big_matrix[i][j] == 0 or big_matrix[i][j] == 20:
+			big_matrix[i][j] = 1
+	big_matrix[1][0] = 3
 				
-				
-						
 #add exit
 func _add_exit():
 	var safei
-	var safej
+	var j = big_matrix[0].size()-1
 	for i in range(big_matrix.size()):
-		for j in range(big_matrix[0].size()):
-			if big_matrix[i][j] == 0 or big_matrix[i][j] == 20:
-				safei = i
-				safej = j
-	big_matrix[safei][safej] = 4		
+		if big_matrix[i][j] == 0 or big_matrix[i][j] == 20:
+			safei = i
+			big_matrix[i][j] = 1
+	big_matrix[safei][j] = 4	
 
 #instantiate shit
+func _instantiate_shit():
+	for i in range(big_matrix.size()):
+		for j in range(big_matrix[0].size()):
+			var option = big_matrix[i][j]
+			match option:
+				0:
+					var empty1_instance = empty1.instantiate()
+					add_child(empty1_instance)
+					var child_count = self.get_child_count()
+					var children = self.get_children()
+					var child = children[child_count-1]
+					child.position = Vector2((block_width*block_scale)/2+j*(block_width)*block_scale,(block_height*block_scale)/2+i*block_height*block_scale)
+					child.scale = Vector2(block_scale,block_scale)
+				20:
+					var empty2_instance = empty2.instantiate()
+					add_child(empty2_instance)
+					var child_count = self.get_child_count()
+					var children = self.get_children()
+					var child = children[child_count-1]
+					child.position = Vector2((block_width*block_scale)/2+j*(block_width)*block_scale,(block_height*block_scale)/2+i*block_height*block_scale)
+					child.scale = Vector2(block_scale,block_scale)
+				1:
+					var brick1_instance = brick1.instantiate()
+					add_child(brick1_instance)
+					var child_count = self.get_child_count()
+					var children = self.get_children()
+					var child = children[child_count-1]
+					child.position = Vector2((block_width*block_scale)/2+j*(block_width)*block_scale,(block_height*block_scale)/2+i*block_height*block_scale)
+					child.scale = Vector2(block_scale,block_scale)
+				11:
+					var brick2_instance = brick2.instantiate()
+					add_child(brick2_instance)
+					var child_count = self.get_child_count()
+					var children = self.get_children()
+					var child = children[child_count-1]
+					child.position = Vector2((block_width*block_scale)/2+j*(block_width)*block_scale,(block_height*block_scale)/2+i*block_height*block_scale)
+					child.scale = Vector2(block_scale,block_scale)
+				3:
+					var player_spawn_instance = player_spawn.instantiate()
+					add_child(player_spawn_instance)
+					var child_count = self.get_child_count()
+					var children = self.get_children()
+					var child = children[child_count-1]
+					child.position = Vector2((block_width*block_scale)/2+j*(block_width)*block_scale,(block_height*block_scale)/2+i*block_height*block_scale)
+					child.scale = Vector2(block_scale,block_scale)
+				4:
+					var player_exit_instance = player_exit.instantiate()
+					add_child(player_exit_instance)
+					var child_count = self.get_child_count()
+					var children = self.get_children()
+					var child = children[child_count-1]
+					child.position = Vector2((block_width*block_scale)/2+j*(block_width)*block_scale,(block_height*block_scale)/2+i*block_height*block_scale)
+					child.scale = Vector2(block_scale,block_scale)
+				2:
+					var kamikaze_spawn_instance = kamikaze_spawn.instantiate()
+					add_child(kamikaze_spawn_instance)
+					var child_count = self.get_child_count()
+					var children = self.get_children()
+					var child = children[child_count-1]
+					child.position = Vector2((block_width*block_scale)/2+j*(block_width)*block_scale,(block_height*block_scale)/2+i*block_height*block_scale)
+					child.scale = Vector2(block_scale,block_scale)
+				5:
+					var grenadier_spawn_instance = grenadier_spawn.instantiate()
+					add_child(grenadier_spawn_instance)
+					var child_count = self.get_child_count()
+					var children = self.get_children()
+					var child = children[child_count-1]
+					child.position = Vector2((block_width*block_scale)/2+j*(block_width)*block_scale,(block_height*block_scale)/2+i*block_height*block_scale)
+					child.scale = Vector2(block_scale,block_scale)
+				6:
+					var sniper_spawn_instance = sniper_spawn.instantiate()
+					add_child(sniper_spawn_instance)
+					var child_count = self.get_child_count()
+					var children = self.get_children()
+					var child = children[child_count-1]
+					child.position = Vector2((block_width*block_scale)/2+j*(block_width)*block_scale,(block_height*block_scale)/2+i*block_height*block_scale)
+					child.scale = Vector2(block_scale,block_scale)
+				_:
+					break

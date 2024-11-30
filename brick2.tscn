@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://3qgoqg0mgfyc"]
+
+[ext_resource type="Texture2D" uid="uid://di5d35gvj4xrh" path="res://brick2.webp" id="1_5l5ws"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("1_5l5ws")
