@@ -1,26 +1,30 @@
 extends Node2D
 
-var block_height = 2000 #px block height
-var block_width = 2000 #px block width
+@export var block_height = 2000 #px block height
+@export var block_width = 2000 #px block width
 
-var stack_length_min = 20 #min length of stacks in blocks
-var stack_length_max = 30 #max length of stacks in blocks 
+@export var stack_length_min = 20 #min length of stacks in blocks
+@export var stack_length_max = 30 #max length of stacks in blocks 
 var stack_length
 
-var stack_count_min = 5 # min number of horizontal lines
-var stack_count_max = 7 # max number of horizontal lines
+@export var stack_count_min = 5 # min number of horizontal lines
+@export var stack_count_max = 7 # max number of horizontal lines
 var stack_count
 
-var vertical_lines_count_max = 5 # max number of vertical lines
-var vertical_lines_count_min = 7 # min number of vertical lines
+@export var vertical_lines_count_max = 5 # max number of vertical lines
+@export var vertical_lines_count_min = 7 # min number of vertical lines
 var vertical_lines_count 
+
+@export var vertical_probability = 2
 
 var big_matrix #matrix of values which will spawn the level lines
 # 0 empty space (first variant)
 # 1 brick (first variant)
-# 2 enemy spawner
-# 3 player spawn
+# 2 enemy spawner (kamikaze)
+# 3 player spawn 
 # 4 boss exit
+# 5 granadier spawner
+# 6 sniper spawner
 # 10 exit port
 # 11 brick (second variant)
 # 12 exit port with enemy
@@ -37,7 +41,14 @@ func _ready() -> void:
 	_set_stack_length()
 	_set_stack_count()
 	_generate_horizontal_lines()
+	big_matrix = _remove_10(big_matrix)
 	_generate_vertical_lines()
+	big_matrix = _remove_10(big_matrix)
+	_randomize_bricks()
+	_randomize_emptys()
+	_randomize_enemies()
+	_add_spawn()
+	_add_exit()
 	
 	for i in range(big_matrix.size()):
 		print(big_matrix[i])
@@ -108,7 +119,7 @@ func _generate_stack():
 						#continue up with enemy
 						if i > 1:
 							#continue up
-							stack[i][j] = 3
+							stack[i][j] = 2
 							stack[i-1][j] = 10
 						else:
 							stack[i][j] = 10
@@ -204,25 +215,34 @@ func _generate_horizontal_lines():
 	big_matrix = matrix
 	#for i in range(matrix.size()):
 		#print(matrix[i])
+
+func _remove_10(matrix):
+	for i in range(matrix.size()):
+		for j in range(matrix[0].size()):
+			if matrix[i][j] == 10 or matrix[i][j] == 12 :
+				matrix[i][j] = 0
+	return matrix
 		
 #set vertical line count
 func _set_vertical_lines_count():
 	vertical_lines_count = randi () % (vertical_lines_count_max - vertical_lines_count_min) + vertical_lines_count_min
 
+#generate vertical lines
 func _generate_vertical_lines():
+	
 	# generate random verticals
-	for i in range(big_matrix.size()-1):
-		for j in range(big_matrix[0].size()-1):
-			if big_matrix[i][j] == 0 or 2 and i+2 < big_matrix.size():
-				var option = randi() % 20
+	for i in range(big_matrix.size()-2):
+		for j in range(big_matrix[0].size()):
+			if big_matrix[i][j] == 0 or big_matrix[i][j] == 2:
+				var option = randi() % vertical_probability
 				match option:
-					0:
-						break
 					1:
-						big_matrix[i-1][j] = 10
+						big_matrix[i+1][j] = 10
+					_:
+						break
 						
 	while count < stack_length:
-		for i in range(big_matrix.size()-1):
+		for i in range(big_matrix.size()-2):
 			for j in range(big_matrix[0].size()-1):
 				if big_matrix[i][j] == 10:
 					big_matrix[i][j] = 0
@@ -230,35 +250,35 @@ func _generate_vertical_lines():
 					match noitop:
 						0:
 							#straight down
-							big_matrix[i-1][j] = 10
+							big_matrix[i+1][j] = 10
 							
 						1:
 							#to the left
 							if j-1 > 0:
-								big_matrix[i-1][j] = 0
-								big_matrix[i-1][j-1] = 10
+								big_matrix[i+1][j] = 0
+								big_matrix[i+1][j-1] = 10
 							else:
 								pass
 							
 						2:
 							#to the right
 							if j+1 < big_matrix[0].size()-1:
-								big_matrix[i-1][j] = 0
-								big_matrix[i-1][j+1] = 10
+								big_matrix[i+1][j] = 0
+								big_matrix[i+1][j+1] = 10
 							else:
 								pass
 						3:
 							#to the left with enemy
 							if j-1 > 0:
-								big_matrix[i-1][j] = 2
-								big_matrix[i-1][j-1] = 10
+								big_matrix[i+1][j] = 2
+								big_matrix[i+1][j-1] = 10
 							else:
 								pass
 						4: 
 							#to the right with enemy
 							if j+1 < big_matrix[0].size()-1:
-								big_matrix[i-1][j] = 2
-								big_matrix[i-1][j+1] = 10
+								big_matrix[i+1][j] = 2
+								big_matrix[i+1][j+1] = 10
 							else:
 								pass
 						
@@ -266,3 +286,64 @@ func _generate_vertical_lines():
 		count += 1
 		
 		# generate certain vertical
+		#no >:/
+
+#randomize bricks
+func _randomize_bricks():
+	for i in range(big_matrix.size()):
+		for j in range(big_matrix[0].size()):
+			if big_matrix[i][j] == 1:
+				var option = randi() % 2
+				match option:
+					1:
+						big_matrix[i][j] = 11
+					_:
+						pass
+	
+#randomize emptys
+func _randomize_emptys():
+	for i in range(big_matrix.size()):
+		for j in range(big_matrix[0].size()):
+			if big_matrix[i][j] == 0:
+				var option = randi() % 2
+				match option:
+					1:
+						big_matrix[i][j] = 20
+					_:
+						pass
+#randomize enemies
+func _randomize_enemies():
+	for i in range(big_matrix.size()):
+		for j in range(big_matrix[0].size()):
+			if big_matrix[i][j] == 2:
+				var option = randi() % 3
+				match option:
+					1:
+						big_matrix[i][j] = 5
+					2:
+						big_matrix[i][j] = 6
+					_:
+						pass
+
+#add spawn
+func _add_spawn():
+	for i in range(big_matrix.size()):
+		for j in range(big_matrix[0].size()):
+			if big_matrix[i][j] == 0 or big_matrix[i][j] == 20:
+				big_matrix[i][j] = 3
+				return
+				
+				
+						
+#add exit
+func _add_exit():
+	var safei
+	var safej
+	for i in range(big_matrix.size()):
+		for j in range(big_matrix[0].size()):
+			if big_matrix[i][j] == 0 or big_matrix[i][j] == 20:
+				safei = i
+				safej = j
+	big_matrix[safei][safej] = 4		
+
+#instantiate shit
