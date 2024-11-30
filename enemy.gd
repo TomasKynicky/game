@@ -21,3 +21,6 @@ func _physics_process(delta: float) -> void:
 func _on_un_life_player_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		emit_signal("un_life_player")
+
+func _on_player_un_life_enemy() -> void:
+	queue_free()

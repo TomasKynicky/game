@@ -8794,4 +8794,5 @@ layer_0/tile_data = PackedInt32Array(1245184, 1048576, 10, 1310720, 1048576, 11,
 position = Vector2(383, 201)
 player = NodePath("../Player")
 
+[connection signal="un_life_enemy" from="Player" to="ENEMY" method="_on_player_un_life_enemy"]
 [connection signal="un_life_player" from="ENEMY" to="Player" method="_on_enemy_un_life_player"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dtcb0ru7ktno6"]
+[gd_scene load_steps=7 format=3 uid="uid://dtcb0ru7ktno6"]
 
 [ext_resource type="Script" path="res://playerScript.gd" id="1_tjxpm"]
 [ext_resource type="Texture2D" uid="uid://w6qflw1gy481" path="res://icon.svg" id="2_t7trd"]
@@ -9,8 +9,16 @@ size = Vector2(132, 132)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tg3qu"]
 size = Vector2(135, 135)
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vovqn"]
+size = Vector2(129.5, 133)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fnplb"]
+size = Vector2(122.5, 134)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("shape_right", "shape_left")]
 script = ExtResource("1_tjxpm")
+shape_right = NodePath("DoDmg/CollisionShapeRIGHT")
+shape_left = NodePath("DoDmg/CollisionShapeLEFT")
 
 [node name="Icon" type="Sprite2D" parent="."]
 texture = ExtResource("2_t7trd")
@@ -27,10 +35,24 @@ wait_time = 10.297
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="DmgDetection" type="Area2D" parent="."]
+position = Vector2(-1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DmgDetection"]
 position = Vector2(-0.5, 0.5)
 shape = SubResource("RectangleShape2D_tg3qu")
 
+[node name="DoDmg" type="Area2D" parent="."]
+
+[node name="CollisionShapeLEFT" type="CollisionShape2D" parent="DoDmg"]
+position = Vector2(-148, 0)
+shape = SubResource("RectangleShape2D_vovqn")
+disabled = true
+
+[node name="CollisionShapeRIGHT" type="CollisionShape2D" parent="DoDmg"]
+position = Vector2(142, -3)
+shape = SubResource("RectangleShape2D_fnplb")
+disabled = true
+
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash_again_timer" to="." method="_on_dash_again_timer_timeout"]
+[connection signal="body_entered" from="DoDmg" to="." method="_on_do_dmg_body_entered"]
