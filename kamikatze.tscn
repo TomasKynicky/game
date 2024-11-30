@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cnt1xrtilngvk"]
+
+[ext_resource type="Script" path="res://kamikatze.gd" id="1_0biad"]
+[ext_resource type="Texture2D" uid="uid://w6qflw1gy481" path="res://icon.svg" id="2_ainlp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nkwlm"]
+size = Vector2(135, 130)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iwar7"]
+size = Vector2(952, 282)
+
+[node name="Kamikatze" type="CharacterBody2D"]
+script = ExtResource("1_0biad")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+texture = ExtResource("2_ainlp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 0)
+shape = SubResource("RectangleShape2D_nkwlm")
+
+[node name="playerFind" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="playerFind"]
+position = Vector2(1, -75)
+shape = SubResource("RectangleShape2D_iwar7")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(-67, 0)
+
+[connection signal="body_entered" from="playerFind" to="." method="_on_player_find_body_entered"]
