@@ -1,3 +1,7 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1732890737
-icon.svg::CompressedTexture2D::1609131284199219152::1732890734::1732890738::1::::<><>::
+::res://::1732966922
+background.gd::GDScript::-1::1732966748::0::1::::<>Node2D<>::
+background.tscn::PackedScene::6914791188339471130::1732966865::0::1::::<><>::res://background.gd
+brick1.tscn::PackedScene::4828345010323484979::1732966677::0::1::::<><>::uid://c0xuayhvumr2m::::res://icon.svg
+icon.svg::CompressedTexture2D::6576258758891113062::1732891443::1732891447::1::::<><>::
+lentilky na uteku.txt::TextFile::-1::1732900651::0::1::::<><>::

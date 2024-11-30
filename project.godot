@@ -10,6 +10,12 @@ config_version=5
 
 [application]
 
-config/name="GameBechyne"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/name="Nový projekt hry"
+run/main_scene="res://background.tscn"
+config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
