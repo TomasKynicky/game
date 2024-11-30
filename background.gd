@@ -2,18 +2,18 @@ extends Node2D
 
 @export var block_height = 850 #px block height
 @export var block_width = 850 #px block width
-@export var block_scale = 0.2
+@export var block_scale = 0.1
 
-@export var stack_length_min = 8 #min length of stacks in blocks
-@export var stack_length_max = 10 #max length of stacks in blocks 
+@export var stack_length_min = 50 #min length of stacks in blocks
+@export var stack_length_max = 70 #max length of stacks in blocks 
 var stack_length
 
-@export var stack_count_min = 2 # min number of horizontal lines
-@export var stack_count_max = 3 # max number of horizontal lines
+@export var stack_count_min = 20 # min number of horizontal lines
+@export var stack_count_max = 30 # max number of horizontal lines
 var stack_count
 
-@export var vertical_lines_count_max = 4 # max number of vertical lines
-@export var vertical_lines_count_min = 5 # min number of vertical lines
+@export var vertical_lines_count_max = 40 # max number of vertical lines
+@export var vertical_lines_count_min = 50 # min number of vertical lines
 var vertical_lines_count 
 
 @export var vertical_probability = 2
@@ -56,6 +56,7 @@ func _ready() -> void:
 	_randomize_enemies()
 	_add_spawn()
 	_add_exit()
+	_add_safety()
 	_instantiate_shit()
 	
 	for i in range(big_matrix.size()):
@@ -351,6 +352,14 @@ func _add_exit():
 			safei = i
 			big_matrix[i][j] = 1
 	big_matrix[safei][j] = 4	
+
+#add safety
+func _add_safety():
+	var j = floor(0.75*stack_length_min)
+	for i in range(1,big_matrix.size()-1):
+		big_matrix[i][j] = 0
+		
+			
 
 #instantiate shit
 func _instantiate_shit():
