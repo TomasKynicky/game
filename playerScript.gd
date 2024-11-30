@@ -87,3 +87,6 @@ func _on_do_dmg_body_entered(body: Node2D) -> void:
 		enemy_in_area = false
 	if body.is_in_group("enemy"):#and Input.is_action_pressed("ui_space")
 		enemy_in_area = true
+
+func _on_sniper_un_life_player_with_sniper() -> void:
+	get_tree().change_scene_to_file("res://game_over.tscn")

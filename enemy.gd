@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var speed = 200
+var speed = 0
 @export var player: CharacterBody2D
 signal un_life_player
 

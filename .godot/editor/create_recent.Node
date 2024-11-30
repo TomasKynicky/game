@@ -1,4 +1,9 @@
 CollisionShape2D
 Area2D
+Timer
+MeshInstance2D
+Sprite2D
+RayCast2D
+CharacterBody2D
 Label
 Camera2D
