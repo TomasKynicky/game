@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var speed = 0
+var speed = 100.0
 @export var player: CharacterBody2D
 signal un_life_player
 
@@ -12,7 +12,7 @@ func _physics_process(delta: float) -> void:
 		velocity += get_gravity() * delta
 
 	
-	if position.distance_to(player_pos) > 3:
+	if position.distance_to(player_pos) > 10:
 		velocity.x = target_pos["x"] * speed
 		move_and_slide()
 		look_at(player_pos)
