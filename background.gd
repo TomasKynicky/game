@@ -11,7 +11,7 @@ var stack_count_min = 5 # min number of horizontal paths
 var stack_count_max = 7 # max number of horizontal lines
 var stack_count
 
-#var matrix #matrix of values which will spawn the level
+var matrix #matrix of values which will spawn the level
 # 0 empty space
 # 1 brick
 # 2 enemy spawner
@@ -153,17 +153,41 @@ func _generate_stack():
 					5: 
 						#continue straight with enemy
 						stack[i][j] = 12
-		
-	for i in stack_length:
+						
+	stack = _crop_stack(stack)
+	
+	for i in stack.size():
 		print(stack[i])
+	
+	
 		
-	#crop stack
+func _crop_stack(stack):
+	var crop = 0
 	for i in range(0,stack_length):
-		var flag = false
+		var flag = true
 		for j in range(0,stack_length):
 			if stack[i][j] != 1:
-				flag = true
-		#if !flag: 
+				flag = false
+		if flag: 
+			crop += 1
+			
+	#assign to matrix
+	var matrix = []
+	for i in range(0, stack_length - crop+1):
+		matrix.append([])
+		for j in range(0, stack_length):
+			matrix[i].append(stack[i][j])
+			
+	var wall = []
+	for i in range(stack_length):
+		wall.append(1)
+		
+	matrix.append(wall)
+			
+		
+	return matrix
+		
+
 			
 
 		
