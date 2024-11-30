@@ -3,3 +3,6 @@ res://HurtBox.gd
 res://world.tscn
 res://enemy.tscn
 res://playerScript.gd
+res://enemy.gd
+res://gameOver.tscn
+res://game_over.tscn

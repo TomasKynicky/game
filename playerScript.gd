@@ -3,7 +3,7 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 const DASH_SPEED = 900.0
-const LIFE = true
+var life = true
 var dashing = false
 var can_dash = true
 
@@ -56,3 +56,8 @@ func dash():
 		can_dash = false
 		$dash_timer.start()
 		$dash_again_timer.start()
+
+
+func _on_enemy_un_life_player() -> void:
+	get_tree().change_scene_to_file("res://game_over.tscn")
+	

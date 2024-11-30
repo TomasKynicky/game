@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtcb0ru7ktno6"]
+[gd_scene load_steps=5 format=3 uid="uid://dtcb0ru7ktno6"]
 
 [ext_resource type="Script" path="res://playerScript.gd" id="1_tjxpm"]
 [ext_resource type="Texture2D" uid="uid://w6qflw1gy481" path="res://icon.svg" id="2_t7trd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0qktk"]
 size = Vector2(132, 132)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tg3qu"]
+size = Vector2(135, 135)
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_tjxpm")
@@ -22,6 +25,12 @@ wait_time = 0.207
 wait_time = 10.297
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="DmgDetection" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DmgDetection"]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_tg3qu")
 
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash_again_timer" to="." method="_on_dash_again_timer_timeout"]

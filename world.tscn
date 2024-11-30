@@ -8781,7 +8781,7 @@ sources/0 = SubResource("TileSetAtlasSource_n26hi")
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource("1_4r3lo")]
+[node name="Player" parent="." groups=["player"] instance=ExtResource("1_4r3lo")]
 position = Vector2(131, 200)
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -8793,3 +8793,5 @@ layer_0/tile_data = PackedInt32Array(1245184, 1048576, 10, 1310720, 1048576, 11,
 [node name="ENEMY" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_2dxne")]
 position = Vector2(383, 201)
 player = NodePath("../Player")
+
+[connection signal="un_life_player" from="ENEMY" to="Player" method="_on_enemy_un_life_player"]
