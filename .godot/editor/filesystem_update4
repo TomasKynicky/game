@@ -1,0 +1,5 @@
+res://player.tscn
+res://HurtBox.gd
+res://world.tscn
+res://enemy.tscn
+res://playerScript.gd
