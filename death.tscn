@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://db7gpe6qg35l1"]
+
+[ext_resource type="Script" path="res://death.gd" id="1_ocjsv"]
+[ext_resource type="Texture2D" uid="uid://c3hw1o12nrj8p" path="res://Menus/RETRY BUTTON.png" id="2_03b1v"]
+[ext_resource type="Texture2D" uid="uid://cscqwlypjnvf0" path="res://Menus/game over .png" id="2_p8pcp"]
+[ext_resource type="Texture2D" uid="uid://djngj7mj6akuo" path="res://Menus/QUIT BUTTON.png" id="3_abavh"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ocjsv")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1154.0
+offset_bottom = 649.0
+texture = ExtResource("2_p8pcp")
+expand_mode = 1
+
+[node name="Retry" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 152.0
+offset_top = 479.0
+offset_right = 1958.0
+offset_bottom = 1300.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("2_03b1v")
+
+[node name="Quit" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 859.0
+offset_top = 156.0
+offset_right = 2653.0
+offset_bottom = 993.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("3_abavh")
+stretch_mode = 0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="button_down" from="Retry" to="." method="_on_retry_button_down"]
+[connection signal="button_down" from="Quit" to="." method="_on_quit_button_down"]

@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkyxihd4kk72u"]
+[gd_scene load_steps=4 format=3 uid="uid://bkyxihd4kk72u"]
 
 [ext_resource type="Texture2D" uid="uid://bg4s71rh2r0vt" path="res://empty2.webp" id="1_3pqwf"]
 [ext_resource type="Texture2D" uid="uid://c0xuayhvumr2m" path="res://icon.svg" id="2_cmssr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dwler"]
+size = Vector2(426, 429)
 
 [node name="Node2D" type="Node2D"]
 
@@ -9,4 +12,11 @@
 texture = ExtResource("1_3pqwf")
 
 [node name="Icon" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_cmssr")
+
+[node name="exit" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="exit"]
+position = Vector2(215, 213.5)
+shape = SubResource("RectangleShape2D_dwler")
