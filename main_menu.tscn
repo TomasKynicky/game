@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://b14kh07og6ie8"]
+
+[ext_resource type="Texture2D" uid="uid://c2e4hvx0d2u8c" path="res://Menus/uvodni menu.png" id="1_88xr0"]
+[ext_resource type="Script" path="res://main_menu.gd" id="1_xch1j"]
+[ext_resource type="Texture2D" uid="uid://bfkft27q3dao5" path="res://Menus/PLAY BUTTON .png" id="2_l5sud"]
+[ext_resource type="Texture2D" uid="uid://djngj7mj6akuo" path="res://Menus/QUIT BUTTON.png" id="3_tq43t"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xch1j")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 647.0
+texture = ExtResource("1_88xr0")
+expand_mode = 1
+
+[node name="Play" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 268.0
+offset_right = 3374.0
+offset_bottom = 1628.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("2_l5sud")
+stretch_mode = 0
+
+[node name="Quit" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 503.0
+offset_top = 429.0
+offset_right = 2297.0
+offset_bottom = 1266.0
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("3_tq43t")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="button_down" from="Play" to="." method="_on_play_button_down"]
+[connection signal="button_down" from="Quit" to="." method="_on_quit_button_down"]
