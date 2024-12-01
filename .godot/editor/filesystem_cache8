@@ -1,13 +1,29 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1732986326
-background.gd::GDScript::-1::1732985554::0::1::::<>Node2D<>::
-background.tscn::PackedScene::6914791188339471130::1732985393::0::1::::<><>::res://background.gd
-brick1.tscn::PackedScene::4828345010323484979::1732985614::0::1::::<><>::uid://c0xuayhvumr2m::::res://icon.svg
-brick1.webp::CompressedTexture2D::8062528591189195128::1732986288::1732986337::1::::<><>::
-brick2.webp::CompressedTexture2D::7782937871949660733::1732986302::1732986337::1::::<><>::
-empty1.webp::CompressedTexture2D::3092891608413738746::1732986313::1732986337::1::::<><>::
-empty2.webp::CompressedTexture2D::2868572143887387545::1732986327::1732986337::1::::<><>::
-icon.svg::CompressedTexture2D::6576258758891113062::1732891443::1732891447::1::::<><>::
+::res://::1733046036
+background.gd::GDScript::-1::1732999742::0::1::::<>Node2D<>::
+background.tscn::PackedScene::6914791188339471130::1733042297::0::1::::<><>::res://background.gd
+brick1.tscn::PackedScene::4828345010323484979::1733042297::0::1::::<><>::uid://dm4swye8ij2bc::::res://brick1.webp
+brick1.webp::CompressedTexture2D::8062528591189195128::1732999742::1733041538::1::::<><>::
+brick2.tscn::PackedScene::1998707819795723350::1733042297::0::1::::<><>::uid://di5d35gvj4xrh::::res://brick2.webp
+brick2.webp::CompressedTexture2D::7782937871949660733::1732999742::1733041538::1::::<><>::
+empty1.tscn::PackedScene::309331098946167853::1733042297::0::1::::<><>::uid://bkchqcxnjl0ck::::res://empty1.webp
+empty1.webp::CompressedTexture2D::3092891608413738746::1732999742::1733041538::1::::<><>::
+empty2.tscn::PackedScene::2208609285252506574::1733042297::0::1::::<><>::uid://bg4s71rh2r0vt::::res://empty2.webp
+empty2.webp::CompressedTexture2D::2868572143887387545::1732999742::1733041538::1::::<><>::
+grenadier_spawn.tscn::PackedScene::3720875481199820968::1733042297::0::1::::<><>::uid://bkchqcxnjl0ck::::res://empty1.webp<>uid://c0xuayhvumr2m::::res://icon.svg
+icon.svg::CompressedTexture2D::6576258758891113062::1732891443::1733041538::1::::<><>::
+kamikaze_spawn.tscn::PackedScene::5816483697526326883::1733042297::0::1::::<><>::uid://bg4s71rh2r0vt::::res://empty2.webp<>uid://c0xuayhvumr2m::::res://icon.svg
 lentilky na uteku.txt::TextFile::-1::1732900651::0::1::::<><>::
-brick2.tscn::PackedScene::1998707819795723350::1732985610::0::1::::<><>::uid://c0xuayhvumr2m::::res://icon.svg
-empty1.tscn::PackedScene::309331098946167853::1732985693::0::1::::<><>::uid://c0xuayhvumr2m::::res://icon.svg
+player_exit.tscn::PackedScene::3139265336985013242::1733042297::0::1::::<><>::uid://bg4s71rh2r0vt::::res://empty2.webp<>uid://c0xuayhvumr2m::::res://icon.svg
+player_spawn.tscn::PackedScene::1375449707294211643::1733042297::0::1::::<><>::uid://bkchqcxnjl0ck::::res://empty1.webp<>uid://c0xuayhvumr2m::::res://icon.svg
+Particles.tscn::PackedScene::9071278350810882167::1733045880::0::1::::<><>::uid://brv0vuxk7ko2s::::res://Particles/Particle_bolt.png<>uid://ramtfnueoto1::::res://Particles/Particle_Cog.png<>uid://wkxvdww62up::::res://Particles/Particle_hřebik.png<>uid://5raudn7k421y::::res://Particles/Particle_spring.png
+sniper_spawn.tscn::PackedScene::4405018422101405324::1733042297::0::1::::<><>::uid://bkchqcxnjl0ck::::res://empty1.webp<>uid://c0xuayhvumr2m::::res://icon.svg
+::res://Menus/::1733046194
+huH!_.png::CompressedTexture2D::5217083751794228855::1733045957::1733046297::1::::<><>::
+RETRY BUTTON.png::CompressedTexture2D::6753962614748542157::1733046104::1733046297::1::::<><>::
+uvodni menu.png::CompressedTexture2D::6677972089638711964::1733045943::1733046297::1::::<><>::
+::res://Particles/::1733043887
+Particle_bolt.png::CompressedTexture2D::3624539471361102896::1733043803::1733043887::1::::<><>::
+Particle_Cog.png::CompressedTexture2D::1193973159457775794::1733043741::1733043887::1::::<><>::
+Particle_hřebik.png::CompressedTexture2D::46065662431787643::1733043824::1733043887::1::::<><>::
+Particle_spring.png::CompressedTexture2D::2140795625959062336::1733043835::1733043887::1::::<><>::

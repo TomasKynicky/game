@@ -1,0 +1,82 @@
+[gd_scene load_steps=9 format=3 uid="uid://d2igvnipacx6n"]
+
+[ext_resource type="Texture2D" uid="uid://brv0vuxk7ko2s" path="res://Particles/Particle_bolt.png" id="1_pbkyw"]
+[ext_resource type="Texture2D" uid="uid://ramtfnueoto1" path="res://Particles/Particle_Cog.png" id="2_wf5ft"]
+[ext_resource type="Texture2D" uid="uid://wkxvdww62up" path="res://Particles/Particle_hřebik.png" id="3_dheds"]
+[ext_resource type="Texture2D" uid="uid://5raudn7k421y" path="res://Particles/Particle_spring.png" id="4_ym2yr"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vdp1l"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
+direction = Vector3(0, -1, 0)
+spread = 20.0
+initial_velocity_min = 481.75
+initial_velocity_max = 1000.0
+gravity = Vector3(0, 980, 0)
+scale_min = 0.5
+scale_max = 0.5
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ygydc"]
+particle_flag_disable_z = true
+inherit_velocity_ratio = 0.125
+direction = Vector3(0, -1, 0)
+spread = 25.313
+initial_velocity_min = 635.04
+initial_velocity_max = 1000.0
+gravity = Vector3(0, 980, 0)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qlbxc"]
+particle_flag_disable_z = true
+inherit_velocity_ratio = 0.27
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 547.45
+initial_velocity_max = 1000.0
+gravity = Vector3(0, 980, 0)
+scale_min = 0.4
+scale_max = 0.4
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_x5ecx"]
+particle_flag_disable_z = true
+inherit_velocity_ratio = 1.0
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 489.05
+initial_velocity_max = 759.12
+gravity = Vector3(0, 980, 0)
+scale_min = 0.6
+scale_max = 0.6
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Screws" type="GPUParticles2D" parent="."]
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_vdp1l")
+texture = ExtResource("1_pbkyw")
+lifetime = 10.0
+explosiveness = 1.0
+randomness = 1.0
+
+[node name="Cogs" type="GPUParticles2D" parent="."]
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_ygydc")
+texture = ExtResource("2_wf5ft")
+lifetime = 10.0
+explosiveness = 1.0
+randomness = 1.0
+
+[node name="Nails" type="GPUParticles2D" parent="."]
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_qlbxc")
+texture = ExtResource("3_dheds")
+lifetime = 10.0
+explosiveness = 1.0
+randomness = 1.0
+
+[node name="Springs" type="GPUParticles2D" parent="."]
+amount = 5
+process_material = SubResource("ParticleProcessMaterial_x5ecx")
+texture = ExtResource("4_ym2yr")
+lifetime = 10.0
+explosiveness = 1.0
+randomness = 0.08
+trail_lifetime = 0.01
