@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5vil0hdm2ob0"]
+
+[ext_resource type="Texture2D" uid="uid://c0xuayhvumr2m" path="res://icon.svg" id="1_e8i6o"]
+[ext_resource type="Script" path="res://enemy.gd" id="1_ef6td"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6055j"]
+size = Vector2(128, 126)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_skpyi"]
+size = Vector2(129, 128)
+
+[node name="ENEMY" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_ef6td")
+
+[node name="Icon" type="Sprite2D" parent="."]
+texture = ExtResource("1_e8i6o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_6055j")
+
+[node name="UnLifePlayer" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UnLifePlayer"]
+position = Vector2(-0.5, 1)
+shape = SubResource("RectangleShape2D_skpyi")
+
+[connection signal="body_entered" from="UnLifePlayer" to="." method="_on_un_life_player_body_entered"]

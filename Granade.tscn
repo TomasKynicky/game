@@ -1,0 +1,53 @@
+[gd_scene load_steps=6 format=3 uid="uid://ckdmc1pubag38"]
+
+[ext_resource type="Script" path="res://granade.gd" id="1_sj2r6"]
+[ext_resource type="Texture2D" uid="uid://c0xuayhvumr2m" path="res://icon.svg" id="1_vujgr"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cjgpp"]
+friction = 0.74
+bounce = 0.24
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pbmm1"]
+size = Vector2(44, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i5ypu"]
+size = Vector2(210, 81)
+
+[node name="Granade" type="RigidBody2D" node_paths=PackedStringArray("boomTime", "timeOfBooom")]
+collision_layer = 2
+collision_mask = 2
+physics_material_override = SubResource("PhysicsMaterial_cjgpp")
+script = ExtResource("1_sj2r6")
+boomTime = NodePath("BoomTime")
+timeOfBooom = NodePath("TimeOfBooom")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(0, -1)
+scale = Vector2(0.335938, 0.3125)
+texture = ExtResource("1_vujgr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_pbmm1")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="Booom" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Booom"]
+position = Vector2(0, -20.5)
+shape = SubResource("RectangleShape2D_i5ypu")
+
+[node name="BoomTime" type="Timer" parent="."]
+wait_time = 1.313
+one_shot = true
+
+[node name="TimeOfBooom" type="Timer" parent="."]
+wait_time = 0.696
+
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="body_entered" from="Booom" to="." method="_on_booom_body_entered"]
+[connection signal="timeout" from="BoomTime" to="." method="_on_boom_time_timeout"]
+[connection signal="timeout" from="TimeOfBooom" to="." method="_on_time_of_booom_timeout"]

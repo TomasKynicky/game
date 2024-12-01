@@ -1,0 +1,62 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6lfdgnacenns"]
+
+[ext_resource type="Texture2D" uid="uid://c0xuayhvumr2m" path="res://icon.svg" id="1_4gv5f"]
+[ext_resource type="Script" path="res://sniper.gd" id="1_il2d8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dxp3e"]
+size = Vector2(126.5, 129)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l1wbr"]
+size = Vector2(244, 11)
+
+[sub_resource type="QuadMesh" id="QuadMesh_d5eqs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6dfu"]
+size = Vector2(901, 406.5)
+
+[node name="Sniper" type="CharacterBody2D" node_paths=PackedStringArray("rayCast", "gunSprite", "timer") groups=["enemy"]]
+script = ExtResource("1_il2d8")
+rayCast = NodePath("RayCast2D")
+gunSprite = NodePath("MeshInstance2D")
+timer = NodePath("Delay")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(2, -1)
+texture = ExtResource("1_4gv5f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.25, -0.5)
+shape = SubResource("RectangleShape2D_dxp3e")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(368, 0)
+hit_from_inside = true
+
+[node name="hit" type="Area2D" parent="RayCast2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RayCast2D/hit"]
+position = Vector2(247, 0)
+shape = SubResource("RectangleShape2D_l1wbr")
+
+[node name="Reload" type="Timer" parent="RayCast2D"]
+wait_time = 2.261
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+position = Vector2(43, -5)
+scale = Vector2(160.5, 49.5)
+mesh = SubResource("QuadMesh_d5eqs")
+
+[node name="Delay" type="Timer" parent="."]
+wait_time = 1.198
+one_shot = true
+
+[node name="dangerArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dangerArea"]
+position = Vector2(2, -137)
+shape = SubResource("RectangleShape2D_g6dfu")
+
+[connection signal="body_entered" from="RayCast2D/hit" to="." method="_on_hit_body_entered"]
+[connection signal="timeout" from="Delay" to="." method="_on_delay_timeout"]
+[connection signal="body_entered" from="dangerArea" to="." method="_on_danger_area_body_entered"]
+[connection signal="body_exited" from="dangerArea" to="." method="_on_danger_area_body_exited"]

@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://dwy4hrah1odff"]
+
+[ext_resource type="Script" path="res://kamikatze.gd" id="1_0biad"]
+[ext_resource type="Texture2D" uid="uid://c0xuayhvumr2m" path="res://icon.svg" id="2_ainlp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nkwlm"]
+size = Vector2(135, 130)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iwar7"]
+size = Vector2(952, 282)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_787xa"]
+size = Vector2(459, 233)
+
+[node name="Kamikatze" type="CharacterBody2D" node_paths=PackedStringArray("rayCastRight", "rayCastLeft")]
+script = ExtResource("1_0biad")
+rayCastRight = NodePath("RightRe")
+rayCastLeft = NodePath("LeftRe")
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(1, 0)
+texture = ExtResource("2_ainlp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, 0)
+shape = SubResource("RectangleShape2D_nkwlm")
+
+[node name="playerFind" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="playerFind"]
+position = Vector2(1, -75)
+shape = SubResource("RectangleShape2D_iwar7")
+
+[node name="RightRe" type="RayCast2D" parent="."]
+target_position = Vector2(74, 0)
+
+[node name="LeftRe" type="RayCast2D" parent="."]
+target_position = Vector2(-70, 0)
+
+[node name="dangerZone" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dangerZone"]
+position = Vector2(2.5, -51.5)
+shape = SubResource("RectangleShape2D_787xa")
+
+[connection signal="body_entered" from="playerFind" to="." method="_on_player_find_body_entered"]
+[connection signal="body_entered" from="dangerZone" to="." method="_on_danger_zone_body_entered"]
