@@ -1,5 +1,5 @@
 extends Control
-var intro = preload("res://background.tscn") #insert name of main scene here
+var game = preload("res://background.tscn") #insert name of main scene here
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
