@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://5de2w1g3bssk"]
+[gd_scene load_steps=7 format=3 uid="uid://5de2w1g3bssk"]
 
 [ext_resource type="Texture2D" uid="uid://w6qflw1gy481" path="res://icon.svg" id="1_4gv5f"]
 [ext_resource type="Script" path="res://sniper.gd" id="1_il2d8"]
@@ -10,6 +10,9 @@ size = Vector2(126.5, 129)
 size = Vector2(244, 11)
 
 [sub_resource type="QuadMesh" id="QuadMesh_d5eqs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g6dfu"]
+size = Vector2(901, 406.5)
 
 [node name="Sniper" type="CharacterBody2D" node_paths=PackedStringArray("rayCast", "gunSprite", "timer") groups=["enemy"]]
 script = ExtResource("1_il2d8")
@@ -47,5 +50,13 @@ mesh = SubResource("QuadMesh_d5eqs")
 wait_time = 1.198
 one_shot = true
 
+[node name="dangerArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dangerArea"]
+position = Vector2(2, -137)
+shape = SubResource("RectangleShape2D_g6dfu")
+
 [connection signal="body_entered" from="RayCast2D/hit" to="." method="_on_hit_body_entered"]
 [connection signal="timeout" from="Delay" to="." method="_on_delay_timeout"]
+[connection signal="body_entered" from="dangerArea" to="." method="_on_danger_area_body_entered"]
+[connection signal="body_exited" from="dangerArea" to="." method="_on_danger_area_body_exited"]

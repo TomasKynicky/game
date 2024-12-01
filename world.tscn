@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dlgnh5pj6jefj"]
+[gd_scene load_steps=10 format=3 uid="uid://dlgnh5pj6jefj"]
 
 [ext_resource type="Texture2D" uid="uid://dpbxojnns3d3t" path="res://Final/Social/test_2.png" id="1_3a8h3"]
 [ext_resource type="PackedScene" uid="uid://dtcb0ru7ktno6" path="res://player.tscn" id="1_4r3lo"]
 [ext_resource type="PackedScene" uid="uid://b5gmhe6ccrby" path="res://enemy.tscn" id="3_2dxne"]
 [ext_resource type="PackedScene" uid="uid://5de2w1g3bssk" path="res://sniper.tscn" id="4_8grs3"]
 [ext_resource type="PackedScene" uid="uid://cnt1xrtilngvk" path="res://kamikatze.tscn" id="5_87pf3"]
+[ext_resource type="PackedScene" uid="uid://b6ei2w5vqgrw0" path="res://granadeGuy.tscn" id="6_1wy7j"]
+[ext_resource type="PackedScene" uid="uid://cmpeu7mw2ujq4" path="res://Granade.tscn" id="6_6krua"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n26hi"]
 texture = ExtResource("1_3a8h3")
@@ -8785,9 +8787,9 @@ sources/0 = SubResource("TileSetAtlasSource_n26hi")
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("1_4r3lo")]
 position = Vector2(131, 200)
+collision_layer = 2
 
 [node name="TileMap" type="TileMap" parent="."]
-light_mask = 3
 position = Vector2(-1, 0)
 tile_set = SubResource("TileSet_upijg")
 collision_visibility_mode = 1
@@ -8803,10 +8805,19 @@ position = Vector2(-823, 206)
 target = NodePath("../Player")
 
 [node name="Kamikatze" parent="." node_paths=PackedStringArray("player") instance=ExtResource("5_87pf3")]
-position = Vector2(1031, 225)
+position = Vector2(1185, 220)
+player = NodePath("../Player")
+
+[node name="Granade" parent="." instance=ExtResource("6_6krua")]
+position = Vector2(483, 229)
+
+[node name="BoomShoter" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_1wy7j")]
+position = Vector2(631, 201)
 player = NodePath("../Player")
 
 [connection signal="un_life_enemy" from="Player" to="ENEMY" method="_on_player_un_life_enemy"]
 [connection signal="un_life_enemy" from="Player" to="Sniper" method="_on_player_un_life_enemy"]
 [connection signal="un_life_player" from="ENEMY" to="Player" method="_on_enemy_un_life_player"]
 [connection signal="un_life_player_with_sniper" from="Sniper" to="Player" method="_on_sniper_un_life_player_with_sniper"]
+[connection signal="un_life_player" from="Kamikatze" to="Player" method="_on_kamikatze_un_life_player"]
+[connection signal="un_life_player" from="Granade" to="Player" method="_on_granade_un_life_player"]
